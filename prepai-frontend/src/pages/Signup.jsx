@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { auth } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import "./Signup.css";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -19,13 +20,37 @@ const Signup = () => {
   };
 
   return (
-    <div className="page-container">
-      <h2>Sign up</h2>
-      <form onSubmit={handleSignup}>
-        <input placeholder="Email" value={email} onChange={e=>setEmail(e.target.value)} />
-        <input placeholder="Password" type="password" value={password} onChange={e=>setPassword(e.target.value)} />
-        <button type="submit">Create account</button>
-      </form>
+    <div className="signup-page">
+      <div className="signup-card">
+        <h2>Create your account</h2>
+
+        <form onSubmit={handleSignup}>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+
+          <button type="submit" className="btn-primary">
+            Create account
+          </button>
+        </form>
+
+        <p className="signup-footer">
+          Already have an account?{" "}
+          <span onClick={() => nav("/login")}>Login</span>
+        </p>
+      </div>
     </div>
   );
 };

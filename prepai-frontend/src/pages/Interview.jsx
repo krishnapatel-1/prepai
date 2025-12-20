@@ -1,30 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../utils/api";
+import "./Interview.css";
 
 const Interview = () => {
   const { id } = useParams();
+  const nav = useNavigate();
+
   const [session, setSession] = useState(null);
   const [currentQ, setCurrentQ] = useState(0);
   const [answer, setAnswer] = useState("");
-  const nav = useNavigate();
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
-  // Restore saved progress (if page refreshed)
+  /* Restore saved progress */
   useEffect(() => {
     const saved = localStorage.getItem(`progress-${id}`);
     if (saved) setCurrentQ(Number(saved));
   }, [id]);
 
-  // Save progress whenever currentQ changes
+  /* Save progress */
   useEffect(() => {
     localStorage.setItem(`progress-${id}`, currentQ);
   }, [currentQ, id]);
 
+  /* Load session */
   useEffect(() => {
     const loadSession = async () => {
       try {
         const res = await api.get(`/session/${id}`);
-        console.log("Session data:", res.data);
         setSession(res.data);
       } catch (err) {
         console.error("Failed to load session:", err);
@@ -34,20 +38,34 @@ const Interview = () => {
     loadSession();
   }, [id]);
 
-  if (!session) return <h2>Loading interview...</h2>;
-  if (!session.questions || session.questions.length === 0)
-    return <h3>No questions found. Please create a new interview.</h3>;
+  if (!session) {
+    return (
+      <div className="page-wrapper interview-page">
+        <h2>Loading interview...</h2>
+      </div>
+    );
+  }
+
+  if (!session.questions || session.questions.length === 0) {
+    return (
+      <div className="page-wrapper interview-page">
+        <h3>No questions found. Please create a new interview.</h3>
+      </div>
+    );
+  }
 
   const question = session.questions[currentQ];
 
   const submitAnswer = async () => {
-    // Prevent empty answers
     if (!answer.trim()) {
       alert("Please write an answer before continuing.");
       return;
     }
 
     try {
+      setSubmitting(true);
+      setError("");
+
       await api.post("/answer/submit-text", {
         sessionId: id,
         questionId: question.id,
@@ -55,45 +73,54 @@ const Interview = () => {
         questionText: question.question,
       });
 
-      // If last question → clear progress + go to results
       if (currentQ + 1 >= session.questions.length) {
         localStorage.removeItem(`progress-${id}`);
         nav(`/result/${id}`);
         return;
       }
 
-      // Otherwise go to next question
-      setCurrentQ(currentQ + 1);
+      setCurrentQ((q) => q + 1);
       setAnswer("");
-
     } catch (err) {
       console.error("Failed to submit answer:", err);
+      setError("Failed to submit answer. Please try again.");
+    } finally {
+      setSubmitting(false);
     }
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Interview Session</h2>
+    <div className="page-wrapper interview-page">
+      <div className="interview-card">
+        <h2>Interview Session</h2>
 
-      <h3>
-        Question {currentQ + 1} / {session.questions.length}
-      </h3>
+        <p className="progress-text">
+          Question {currentQ + 1} of {session.questions.length}
+        </p>
 
-      <p style={{ fontSize: "20px", margin: "10px 0" }}>
-        {question.question}
-      </p>
+        <div className="question-box">
+          {question.question}
+        </div>
 
-      <textarea
-        rows="5"
-        style={{ width: "100%", padding: "10px" }}
-        value={answer}
-        placeholder="Write your answer here..."
-        onChange={(e) => setAnswer(e.target.value)}
-      />
+        <textarea
+          className="answer-box"
+          rows="6"
+          placeholder="Write your answer here..."
+          value={answer}
+          onChange={(e) => setAnswer(e.target.value)}
+          disabled={submitting}
+        />
 
-      <button style={{ marginTop: "10px" }} onClick={submitAnswer}>
-        Submit Answer
-      </button>
+        {error && <p className="error-text">{error}</p>}
+
+        <button
+          className="btn-primary submit-btn"
+          onClick={submitAnswer}
+          disabled={submitting}
+        >
+          {submitting ? "Submitting..." : "Submit Answer"}
+        </button>
+      </div>
     </div>
   );
 };

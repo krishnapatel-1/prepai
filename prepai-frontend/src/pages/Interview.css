@@ -1,0 +1,68 @@
+
+/* Page */
+.interview-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Card */
+.interview-card {
+  width: 100%;
+  max-width: 800px;
+  background: var(--bg-card);
+  padding: 36px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+/* Title */
+.interview-card h2 {
+  margin-bottom: 10px;
+}
+
+/* Progress */
+.progress-text {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+/* Question box */
+.question-box {
+  font-size: 20px;
+  font-weight: 500;
+  background: #fafafa;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+/* Answer textarea */
+.answer-box {
+  width: 100%;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+  padding: 16px;
+  font-size: 14px;
+  resize: vertical;
+  min-height: 140px;
+}
+
+.answer-box:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+/* Submit button */
+.submit-btn {
+  margin-top: 16px;
+}
+
+/* Error */
+.error-text {
+  margin-top: 12px;
+  color: #d9534f;
+  font-size: 14px;
+}

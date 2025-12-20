@@ -1,22 +1,31 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import CreateInterview from "./pages/CreateInterview";
 import Interview from "./pages/Interview";
 import Result from "./pages/Result";
+
 import ProtectedRoute from "./components/ProtectedRoute";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
+      <Navbar />
+
+      <Routes>
+
+        {/* PUBLIC ROUTES */}
+        <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
 
+        {/* PROTECTED ROUTES */}
         <Route
           path="/dashboard"
           element={
@@ -27,7 +36,7 @@ function App() {
         />
 
         <Route
-          path="/create-interview"
+          path="/create"
           element={
             <ProtectedRoute>
               <CreateInterview />
@@ -53,14 +62,6 @@ function App() {
           }
         />
 
-<Route
-  path="/dashboard"
-  element={
-    <ProtectedRoute>
-      <Dashboard />
-    </ProtectedRoute>
-  }
-/>          
       </Routes>
     </BrowserRouter>
   );

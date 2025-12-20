@@ -1,0 +1,93 @@
+/* Center page */
+.page-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-main);
+  padding: 24px;
+}
+
+/* Login Card */
+.page-container > form,
+.page-container > h2,
+.page-container > button,
+.page-container > hr {
+  width: 100%;
+  max-width: 420px;
+}
+
+/* Card wrapper effect */
+.page-container {
+  flex-direction: column;
+}
+
+.page-container h2 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Form card */
+.page-container form {
+  background: var(--bg-card);
+  padding: 32px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+/* Inputs */
+.page-container input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+  font-size: 14px;
+}
+
+.page-container input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+/* Login button */
+.page-container form button {
+  width: 100%;
+  margin-top: 10px;
+  background: var(--primary);
+  color: #000000;
+  border: none;
+  padding: 14px;
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.page-container form button:hover {
+  background: var(--primary-hover);
+}
+
+/* Divider */
+.page-container hr {
+  margin: 24px 0;
+  border: none;
+  border-top: 1px solid var(--border-light);
+}
+
+/* Google Button */
+.page-container > button {
+  max-width: 420px;
+  background: #fff;
+  color: var(--text-primary);
+  border: 1px solid var(--border-light);
+  padding: 14px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.page-container > button:hover {
+  background: #f5f5f5;
+}

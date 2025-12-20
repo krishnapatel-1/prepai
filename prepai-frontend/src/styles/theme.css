@@ -1,0 +1,108 @@
+/* ========== CSS VARIABLES ========== */
+:root {
+  --bg-main: #f7f7f7;
+  --bg-card: #ffffff;
+
+  --text-primary: #111111;
+  --text-secondary: #666666;
+  --text-muted: #888888;
+
+  --border-light: #e5e5e5;
+
+  --primary: #111111;
+  --primary-hover: #000000;
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 32px;
+
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+/* ========== GLOBAL RESET ========== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: var(--bg-main);
+  color: var(--text-primary);
+}
+
+/* ========== COMMON COMPONENTS ========== */
+
+/* Page Wrapper */
+.page-wrapper {
+  min-height: 100vh;
+  padding: 24px;
+}
+
+/* Card */
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+/* Buttons */
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+}
+
+.btn-outline {
+  background: #fff;
+  color: var(--primary);
+  border: 1px solid var(--border-light);
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+
+/* Inputs */
+.input {
+  width: 100%;
+  padding: 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+  font-size: 14px;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+/* Headings */
+h1 {
+  font-size: 42px;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+p {
+  color: var(--text-secondary);
+}

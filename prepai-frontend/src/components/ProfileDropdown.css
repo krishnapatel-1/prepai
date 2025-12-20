@@ -1,0 +1,47 @@
+.profile-wrapper {
+  position: relative;
+}
+
+/* Dropdown */
+.profile-dropdown {
+  position: absolute;
+  right: 0;
+  top: 46px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  min-width: 180px;
+  padding: 8px;
+  z-index: 200;
+}
+
+/* Buttons */
+.profile-dropdown button {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 10px 12px;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+}
+
+.profile-dropdown button:hover {
+  background: #f3f3f3;
+}
+
+/* Email */
+.profile-email {
+  font-size: 13px;
+  padding: 8px 12px;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: 6px;
+}
+
+/* Danger */
+.profile-dropdown .danger {
+  color: #d9534f;
+}

@@ -1,0 +1,70 @@
+/* Page wrapper */
+.create-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-main);
+  padding: 24px;
+}
+
+/* Card */
+.create-card {
+  width: 100%;
+  max-width: 480px;
+  background: var(--bg-card);
+  padding: 36px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+/* Title */
+.create-card h2 {
+  margin-bottom: 24px;
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Labels */
+.create-card label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* Inputs */
+.create-card input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+  font-size: 14px;
+}
+
+.create-card input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+/* Button */
+.create-btn {
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* Disabled button */
+.create-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Error */
+.error-text {
+  margin-bottom: 16px;
+  color: #d9534f;
+  font-size: 14px;
+  text-align: center;
+}

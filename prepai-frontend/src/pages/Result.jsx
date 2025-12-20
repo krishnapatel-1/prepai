@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../utils/api";
+import "./Result.css";
 
 const Result = () => {
   const { id } = useParams();
@@ -25,37 +26,66 @@ const Result = () => {
     load();
   }, [id]);
 
-  if (!data) return <h2>Loading result...</h2>;
+  if (!data) {
+    return (
+      <div className="page-wrapper result-page">
+        <h2>Loading result...</h2>
+      </div>
+    );
+  }
 
   const { session, answers } = data;
 
-  if (!session.questions || session.questions.length === 0)
-    return <h3>No questions found. Please create a new interview.</h3>;
+  if (!session.questions || session.questions.length === 0) {
+    return (
+      <div className="page-wrapper result-page">
+        <h3>No questions found. Please create a new interview.</h3>
+      </div>
+    );
+  }
 
   return (
-    <div style={{ padding: 20 }}>
-      <h2>Interview Result</h2>
+    <div className="page-wrapper result-page">
+      <h2 className="result-title">Interview Result</h2>
 
+      {/* QUESTIONS */}
       {session.questions.map((q) => {
-        const ans = answers.find((a) => String(a.questionId) === String(q.id));
+        const ans = answers.find(
+          (a) => String(a.questionId) === String(q.id)
+        );
 
         return (
-          <div key={q.id} style={{ marginBottom: "20px" }}>
-            <h3>Q: {q.question}</h3>
-            <p><b>Your Answer:</b> {ans?.userAnswer || "Not answered"}</p>
-            <p><b>Score:</b> {ans?.aiScore ?? "N/A"}</p>
-            <p><b>Feedback:</b> {ans?.aiFeedback || "Not available"}</p>
+          <div key={q.id} className="question-card">
+            <h3 className="question-text">Q: {q.question}</h3>
+
+            <p>
+              <strong>Your Answer:</strong>{" "}
+              {ans?.userAnswer || "Not answered"}
+            </p>
+
+            <p>
+              <strong>Score:</strong> {ans?.aiScore ?? "N/A"}
+            </p>
+
+            <p>
+              <strong>Feedback:</strong>{" "}
+              {ans?.aiFeedback || "Not available"}
+            </p>
           </div>
         );
       })}
 
-      {/* SUMMARY SECTION */}
-      <div style={{ marginTop: "40px", padding: "20px", borderTop: "2px solid #999" }}>
+      {/* SUMMARY */}
+      <div className="summary-card">
         <h2>Overall Summary</h2>
 
         {summary ? (
           <>
-            <p><b>Average Score:</b> {summary.avgScore} / 10</p>
+            <p>
+              <strong>Average Score:</strong>{" "}
+              {summary.avgScore} / 10
+            </p>
+
             <h3>Summary</h3>
             <p>{summary.summary}</p>
 
@@ -78,11 +108,17 @@ const Result = () => {
         )}
       </div>
 
-      <div style={{ marginTop: "40px" }}>
-        <button onClick={() => nav("/dashboard")}>Go to Dashboard</button>
+      {/* ACTIONS */}
+      <div className="result-actions">
+        <button
+          className="btn-outline"
+          onClick={() => nav("/dashboard")}
+        >
+          Go to Dashboard
+        </button>
 
         <button
-          style={{ marginLeft: "10px", backgroundColor: "#007bff", color: "white" }}
+          className="btn-primary"
           onClick={async () => {
             try {
               const res = await api.post(`/retake/${id}`);
