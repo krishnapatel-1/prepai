@@ -11,7 +11,7 @@ import Result from "./pages/Result";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 import Navbar from "./components/Navbar";
-
+import "./styles/theme.css";
 function App() {
   return (
     <BrowserRouter>

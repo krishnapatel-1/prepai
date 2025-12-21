@@ -2,11 +2,35 @@ const axios = require("axios");
 
 exports.generateQuestions = async (role, topics, count) => {
   try {
-    const prompt = `
-      Generate ${count} interview questions for a ${role}.
-      Topics: ${topics.join(", ")}.
-      Only return a clean numbered list (1., 2., 3., ...), nothing else.
-    `;
+   const prompt = `
+You are a friendly technical interviewer conducting an interview for a beginner-level candidate.
+
+Generate ${count} interview questions for the role: ${role}.
+
+Topics: ${topics.join(", ")}
+
+GUIDELINES:
+- Questions should be suitable for beginners or freshers.
+- Avoid very advanced system design or architecture questions.
+- Focus on basic understanding, common usage, and simple real-life examples.
+- Questions can include:
+  - "What is..."
+  - "Why do we use..."
+  - "How does ... work?"
+- Keep questions clear, short, and easy to understand.
+- Do not include tricky edge cases or deep optimizations.
+- Assume the candidate has basic knowledge but limited real-world experience.
+
+FORMAT:
+- Return ONLY a clean numbered list.
+- Example:
+1. Question one
+2. Question two
+3. Question three
+
+Do not include explanations or extra text.
+`;
+
 
     const response = await axios.post(
       "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent",

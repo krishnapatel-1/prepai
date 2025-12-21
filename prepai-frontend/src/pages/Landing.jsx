@@ -1,14 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import "./Landing.css";
 
 const Landing = () => {
   const nav = useNavigate();
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) nav("/dashboard");
-  }, [nav]);
+  const { user } = useAuth(); // ✅ auth-aware
 
   return (
     <div className="landing-wrapper">
@@ -18,17 +15,38 @@ const Landing = () => {
         </h1>
 
         <p className="hero-subtext">
-          AI-powered mock interviews with real-time feedback and performance
-          insights.
+         A better way to
+improve your interview chances and skills
         </p>
 
+        {/* ✅ CTA changes based on login */}
         <div className="cta-box">
-          <button className="search-btn" onClick={() => nav("/login")}>
-            Start Interview
-          </button>
-          <button className="secondary-btn" onClick={() => nav("/signup")}>
-            Sign Up Free
-          </button>
+          {!user ? (
+            <>
+              <button
+                className="search-btn"
+                onClick={() => nav("/login")}
+              >
+                Start Interview
+              </button>
+
+              <button
+                className="secondary-btn"
+                onClick={() => nav("/signup")}
+              >
+                Sign Up Free
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                className="search-btn"
+                onClick={() => nav("/create")}
+              >
+                Start New Interview
+              </button>
+            </>
+          )}
         </div>
 
         <div className="info-card">
