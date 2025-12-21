@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const authMiddleware = require("../middleware/auth");
-const User = require("../models/user");
+const User = require("../models/User");
 
 // Verify token and return user info
 router.get("/me", authMiddleware, async (req, res) => {
