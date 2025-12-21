@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import api from "../utils/api";
 import { useNavigate } from "react-router-dom";
-import "./Createinterview.css";
+import "./CreateInterview.css";
 
 const CreateInterview = () => {
   const [role, setRole] = useState("");
