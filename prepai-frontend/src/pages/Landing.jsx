@@ -2,6 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "./Landing.css";
+import Footer from "../components/Footer";
+import CompanyOrbit from "../components/CompanyMarquee";
+import FeedBack from "../components/FeedBack";
 
 const Landing = () => {
   const nav = useNavigate();
@@ -16,7 +19,7 @@ const Landing = () => {
 
         <p className="hero-subtext">
          A better way to
-improve your interview chances and skills
+         improve your interview chances and skills
         </p>
 
         {/* ✅ CTA changes based on login */}
@@ -57,7 +60,13 @@ improve your interview chances and skills
             <li>📈 Interview summary & progress tracking</li>
           </ul>
         </div>
+
+   < CompanyOrbit />
+
+   <FeedBack/>  
+
       </section>
+      <Footer />
     </div>
   );
 };

@@ -9,13 +9,13 @@
 .landing-wrapper {
   min-height: 100vh;
   background: var(--bg-main);
-  padding: 12px;
+   
 }
 
 /* Hero Section */
 .hero {
    margin: 0 auto; 
-  padding: 90px 20px;
+  padding:90px 0px;
   text-align: center;
 }
 
@@ -34,6 +34,10 @@
 
 /* CTA Buttons */
 .cta-box {
+  display: flex;
+  justify-content: center ;
+  align-items: center;
+  
   margin-top: 40px;
 }
 
