@@ -14,26 +14,30 @@ const deleteRoutes = require("./src/routes/deleteRoutes");
 
 const app = express();
 
-/* 🔥 CORS — MUST BE BEFORE ROUTES */
+/* 🔥🔥🔥 CORS MUST BE FIRST — NO EXCEPTIONS */
 app.use(
   cors({
     origin: [
       "http://localhost:5173",
       "http://localhost:3000",
-      "https://YOUR_FRONTEND.vercel.app"
+      "https://prepai-red.vercel.app",
     ],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
   })
 );
 
-/* JSON middleware */
+/* 🔥 HANDLE PREFLIGHT EXPLICITLY */
+app.options("*", cors());
+
+/* JSON */
 app.use(express.json());
 
-/* Connect DB */
+/* DB */
 connectDB();
 
-/* Routes */
+/* ROUTES */
 app.use("/api/auth", authRoutes);
 app.use("/api/session", sessionRoutes);
 app.use("/api/answer", answerRoutes);
@@ -43,13 +47,13 @@ app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/retake", retakeRoutes);
 app.use("/api/delete", deleteRoutes);
 
-/* Global error handler */
+/* ERROR HANDLER */
 app.use((err, req, res, next) => {
   console.error("GLOBAL ERROR:", err.stack);
-  res.status(500).json({ error: "Internal Server Error. Please try again." });
+  res.status(500).json({ error: "Internal Server Error" });
 });
 
-/* Start server */
+/* START */
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () =>
   console.log(`🚀 Server running on port ${PORT}`)
