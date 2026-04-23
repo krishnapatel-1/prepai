@@ -32,3 +32,4 @@ const CompanyMarquee = () => {
 };
 
 export default CompanyMarquee;
+ 

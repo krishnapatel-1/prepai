@@ -36,3 +36,4 @@ router.get("/:sessionId", auth, async (req, res) => {
 });
 
 module.exports = router;
+ 

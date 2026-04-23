@@ -31,3 +31,4 @@ dist-ssr/
 # Optional: Ignore environment variables
 .env
 .env.*.local
+ 
